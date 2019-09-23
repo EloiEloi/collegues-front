@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href https://eloieloi.github.io/collegues-front/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build": "ng build --prod --base-href https://eloieloi.github.io/collegues-front/"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
