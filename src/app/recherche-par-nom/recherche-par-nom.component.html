@@ -1,19 +1,16 @@
-<div>
-    <div class="input-group">
-
-        <input type="text" class="form-control" placeholder="nom du collegue" aria-label="nom du collegue"
-            aria-describedby="button-addon3">
-        <div class="input-group-append">
-            <button (click)="rechercherCollegueParNom()" class="btn btn-outline-secondary" type="button"
-                id="button-addon3">rechercher</button>
-        </div>
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="nom du collegue" aria-label="nom du collegue"
+        aria-describedby="button-addon3" #nom>
+    <div class="input-group-append">
+        <button (click)="rechercherCollegueParNom(nom.value)" class="btn btn-outline-secondary" type="button"
+            id="button-addon3">rechercher</button>
     </div>
-
-    <div *ngIf="rechercheIsFinie; else elseBlock"></div>
-    <ng-template #elseBlock>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of maListe">
-                {{obj.matricule}}</li>
-        </ul>
-    </ng-template>
 </div>
+
+<div *ngIf="rechercheIsFinie; else elseBlock"></div>
+<ng-template #elseBlock>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let obj of maListe">
+            {{obj.matricule}}</li>
+    </ul>
+</ng-template>

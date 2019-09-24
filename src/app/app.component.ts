@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'collegues-front';
 
   objetCollegue = mockCollegue;
+  authentificationIsOk: boolean = false;
 
   constructor() {
 

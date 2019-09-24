@@ -1,11 +1,18 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container js text-center">
-        <h1 class="display-4">Administration Collegue</h1>
+        <h1 class="display-2">Administration Collegue</h1>
         <p class="lead">Bienvenue sur l'application qui trouve les collegues que vous cherchez</p>
     </div>
 </div>
 
-<div class="d-flex flex-row justify-content-center m-3">
-    <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
-    <app-collegue [col]="objetCollegue"></app-collegue>
+<div *ngIf="authentificationIsOk; else elseBlock" class="container row mx-auto">
+    <div class="col">
+        <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
+    </div>
+    <div class="col">
+        <app-collegue [col]="objetCollegue"></app-collegue>
+    </div>
 </div>
+<ng-template #elseBlock>
+    <app-authentification></app-authentification>
+</ng-template>

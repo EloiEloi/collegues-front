@@ -1,43 +1,86 @@
-<div class="d-flex flex-row bd-highlight">
-    <div class="d-flex"><img class="img-fluid rounded" src="{{col.photoUrl}}" alt=""></div>
-    <div class="d-flex flex-column align-self-stretch">
-        <div class="d-flex flex-column mb-3 align-self-start">
-            <div class="">Matricule : <span>{{col.matricule}}</span></div>
-            <div class="">Nom : <span>{{col.nom | uppercase}}</span></div>
-            <div class="">Prenom : <span>{{col.prenom}}</span></div>
-            <div class="">Date de naissance : <span>{{col.dateDeNaissance | date}}</span></div>
-            <div *ngIf="modifierIsVisible; else elseBlock">
-                <div>Email : <span>{{col.email}}</span></div>
-                <div>Photo Url : <span>{{col.photoUrl}}</span></div>
-            </div>
-            <ng-template #elseBlock>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="votre email" aria-label="email"
-                        aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2">http://</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="votre photo" aria-label="photo"
-                        aria-describedby="basic-addon2">
-                </div>
-            </ng-template>
+<div class="card mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="{{col.photoUrl}}" class="card-img rounded-0" alt="{{col.nom}}">
         </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><span>{{col.nom | uppercase}}</span></h5>
+                <div class="card-text"><span class="text-muted">Matricule : </span><span>{{col.matricule}}</span></div>
+                <div class="card-text"><span class="text-muted">Nom : </span><span>{{col.nom | uppercase}}</span></div>
+                <div class="card-text"><span class="text-muted">Prenom : </span><span>{{col.prenom}}</span></div>
+                <div class="card-text"><span class="text-muted">Date de naissance :
+                    </span><span>{{col.dateDeNaissance | date}}</span></div>
+                <div class="card-text" *ngIf="modifierIsVisible; else elseBlock">
+                    <div><span class="text-muted">Email : </span><span>{{col.email}}</span></div>
+                    <div><span class="text-muted">Photo Url : </span><span>{{col.photoUrl}}</span></div>
+                </div>
+                <ng-template #elseBlock>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="votre email" aria-label="email"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">http://</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="votre photo" aria-label="photo"
+                            aria-describedby="basic-addon2">
+                    </div>
+                </ng-template>
 
-        <div class="mt-auto d-flex flex-row align-items-end ">
-
-            <ng-container *ngIf="creerIsVisible"><button (click)="creerCollegue()" type="button"
-                    class="btn btn-lg btn-outline-primary">nouveau</button></ng-container>
-
-            <ng-container *ngIf="modifierIsVisible"> <button (click)="modifierCollegue()" type="button"
-                    class="btn btn-lg btn-outline-secondary">modifier</button></ng-container>
-
-            <ng-container *ngIf="validerIsVisible"><button (click)="validerCreationCollegue()" type="button"
-                    class="btn btn-lg btn-outline-primary">valider</button></ng-container>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+            </div>
         </div>
     </div>
+</div>
+
+<!-- 
+<div class="row">
+    <div class="col"><img class="img-fluid rounded img-thumbnail" src="{{col.photoUrl}}" alt=""></div>
+    <div class="col d-flex flex-column ">
+        <div class="">Matricule : <span>{{col.matricule}}</span></div>
+        <div class="">Nom : <span>{{col.nom | uppercase}}</span></div>
+        <div class="">Prenom : <span>{{col.prenom}}</span></div>
+        <div class="">Date de naissance : <span>{{col.dateDeNaissance | date}}</span></div>
+        <div *ngIf="modifierIsVisible; else elseBlock">
+            <div>Email : <span>{{col.email}}</span></div>
+            <div>Photo Url : <span>{{col.photoUrl}}</span></div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="votre email" aria-label="email"
+                    aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">http://</span>
+                </div>
+                <input type="text" class="form-control" placeholder="votre photo" aria-label="photo"
+                    aria-describedby="basic-addon2">
+            </div>
+        </ng-template>
+
+
+
+    </div>
+
+
+</div> -->
+<div class="row align-items-end ">
+
+    <ng-container *ngIf="creerIsVisible"><button (click)="creerCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary">nouveau</button></ng-container>
+
+    <ng-container *ngIf="modifierIsVisible"> <button (click)="modifierCollegue()" type="button"
+            class="btn btn-lg btn-outline-secondary">modifier</button></ng-container>
+
+    <ng-container *ngIf="validerIsVisible"><button (click)="validerCreationCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary">valider</button></ng-container>
 </div>

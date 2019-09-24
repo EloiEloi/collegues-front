@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { CollegueComponent } from './collegue/collegue.component';
 import { mockCollegue } from "./mock/mock";
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CollegueComponent,
-    RechercheParNomComponent
+    RechercheParNomComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule, NgbModule
