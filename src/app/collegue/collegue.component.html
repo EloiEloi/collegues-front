@@ -1,14 +1,11 @@
-<div class="d-flex flex-row justify-content-center">
-    <div class="d-"><img class="img-fluid rounded m-3" src="{{col.photoUrl}}" alt=""></div>
-    <div class="d-flex flex-column align-self-stretch m-3">
+<div class="d-flex flex-row bd-highlight">
+    <div class="d-flex"><img class="img-fluid rounded" src="{{col.photoUrl}}" alt=""></div>
+    <div class="d-flex flex-column align-self-stretch">
         <div class="d-flex flex-column mb-3 align-self-start">
             <div class="">Matricule : <span>{{col.matricule}}</span></div>
             <div class="">Nom : <span>{{col.nom | uppercase}}</span></div>
             <div class="">Prenom : <span>{{col.prenom}}</span></div>
             <div class="">Date de naissance : <span>{{col.dateDeNaissance | date}}</span></div>
-
-
-
             <div *ngIf="modifierIsVisible; else elseBlock">
                 <div>Email : <span>{{col.email}}</span></div>
                 <div>Photo Url : <span>{{col.photoUrl}}</span></div>
@@ -29,9 +26,7 @@
                         aria-describedby="basic-addon2">
                 </div>
             </ng-template>
-
         </div>
-
 
         <div class="mt-auto d-flex flex-row align-items-end ">
 
@@ -45,3 +40,4 @@
                     class="btn btn-lg btn-outline-primary">valider</button></ng-container>
         </div>
     </div>
+</div>

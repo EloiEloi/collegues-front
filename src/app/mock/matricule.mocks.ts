@@ -1,3 +1,3 @@
-const mockMatricules = ["126ds68c43sc21evrv", "ezvrebevevrrv", "csvr64escrrvg84vs3", "zrc4cqc7cv6e4fes4cevev"];
+const mockMatricules: any[] = [{ matricule: "126ds6dbd3sc21evrv" }, { matricule: "888ds68c43sc456vrv" }, { matricule: "1fgrrgc43sc21evrv" }, { matricule: "uyytd8c43sc21evrv" }];
 
 export { mockMatricules };
