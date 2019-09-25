@@ -14,11 +14,11 @@ export class RechercheParNomComponent implements OnInit {
 
   maListe: any[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private _dataService: DataService) { }
 
   rechercherCollegueParNom(nom: string) {
-    this.maListe = this.dataService.rechercherParNom(nom);
-    
+    this.maListe = this._dataService.rechercherParNom(nom);
+
   }
 
   ngOnInit() {

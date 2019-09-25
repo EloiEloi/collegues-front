@@ -7,6 +7,7 @@ import { CollegueComponent } from './collegue/collegue.component';
 import { mockCollegue } from "./mock/mock";
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { AuthentificationComponent } from './authentification/authentification.c
     AuthentificationComponent
   ],
   imports: [
-    BrowserModule, NgbModule
+    BrowserModule, NgbModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

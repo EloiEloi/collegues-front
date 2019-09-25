@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
+
 
 @Component({
   selector: 'app-authentification',
@@ -7,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthentificationComponent implements OnInit {
 
-  authentification;
 
-  constructor() { }
 
-  authentifier(login: string, password: string) {
-    console.log(login, password);
+  constructor(private _dataService: DataService) {
+
+  }
+
+  authentifier(identifiant: string, password: string) {
+    this._dataService.connexionAuthentification(identifiant, password)
     return false;
   }
 
