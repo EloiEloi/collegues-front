@@ -1,14 +1,14 @@
 class Collegue {
-    matricule: string;
-    nom: string;
-    prenom: string;
-    email: string;
-    dateDeNaissance: Date;
-    photoUrl: string;
+    matricule: string | undefined;
+    nom: string | undefined;
+    prenom: string | undefined;
+    email: string | undefined;
+    ddn: Date | undefined;
+    photoUrl: string | undefined;
 
-    constructor(matricule: string, nom: string, prenom: string, email: string, dateDeNaissance: Date, photoUrl: string) {
+    constructor(matricule: string | undefined, nom: string | undefined, prenom: string | undefined, email: string | undefined, ddn: Date | undefined, photoUrl: string | undefined) {
         this.matricule = matricule;
-        this.dateDeNaissance = dateDeNaissance;
+        this.ddn = ddn;
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;

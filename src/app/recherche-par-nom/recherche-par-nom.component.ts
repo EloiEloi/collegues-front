@@ -12,12 +12,13 @@ export class RechercheParNomComponent implements OnInit {
 
   rechercheIsFinie: boolean = false;
 
-  maListe: any[] = [];
+  maListe: string[] = [];
 
   constructor(private _dataService: DataService) { }
 
   rechercherCollegueParNom(nom: string) {
-    this.maListe = this._dataService.rechercherParNom(nom);
+    this._dataService.rechercherParNom(nom).subscribe((list => this.maListe = list));
+    //this.maListe = this._dataService.rechercherParNom(nom);
 
   }
 

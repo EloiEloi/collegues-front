@@ -10,7 +10,7 @@
                 <div class="card-text"><span class="text-muted">Nom : </span><span>{{col.nom | uppercase}}</span></div>
                 <div class="card-text"><span class="text-muted">Prenom : </span><span>{{col.prenom}}</span></div>
                 <div class="card-text"><span class="text-muted">Date de naissance :
-                    </span><span>{{col.dateDeNaissance | date}}</span></div>
+                    </span><span>{{col.ddn | date}}</span></div>
                 <div class="card-text" *ngIf="modifierIsVisible; else elseBlock">
                     <div><span class="text-muted">Email : </span><span>{{col.email}}</span></div>
                     <div><span class="text-muted">Photo Url : </span><span>{{col.photoUrl}}</span></div>
