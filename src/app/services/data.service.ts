@@ -87,4 +87,11 @@ export class DataService {
       .pipe(map((data: any) => new Collegue(data.matricule, data.nom, data.prenom, data.email, data.ddn, data.photoUrl)))
 
   }
+
+  modifierCollegueCourant(): Observable<Collegue> {
+    const collegue = this.subCollegueConnecte;
+    console.log(collegue);
+    return null;
+    //return this._http.patch<string[]>(`${environment.backendUrl}collegues/${matricule}`, { collegue }, this.httpOptions)
+  }
 }

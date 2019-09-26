@@ -1,21 +1,47 @@
 <div class="card mb-3">
     <div class="row no-gutters">
-        <div class="col-md-4">
+        <div class="col-4">
             <img src="{{col.photoUrl}}" class="card-img rounded-0" alt="{{col.nom}}">
         </div>
-        <div class="col-md-8">
+        <div class="col-8">
             <div class="card-body">
-                <h5 class="card-title"><span>{{col.nom | uppercase}}</span></h5>
-                <div class="card-text"><span class="text-muted">Matricule : </span><span>{{col.matricule}}</span></div>
-                <div class="card-text"><span class="text-muted">Nom : </span><span>{{col.nom | uppercase}}</span></div>
-                <div class="card-text"><span class="text-muted">Prenom : </span><span>{{col.prenom}}</span></div>
-                <div class="card-text"><span class="text-muted">Date de naissance :
-                    </span><span>{{col.ddn | date}}</span></div>
-                <div class="card-text" *ngIf="modifierIsVisible; else elseBlock">
-                    <div><span class="text-muted">Email : </span><span>{{col.email}}</span></div>
-                    <div><span class="text-muted">Photo Url : </span><span>{{col.photoUrl}}</span></div>
+
+                <h5 class="card-title"><span>{{col.nom | uppercase}} {{col.prenom | uppercase}}</span></h5>
+
+                <div class="card-text">
+                    <span class="text-muted">Matricule : </span>
+                    <input type="text" class="rounded-pill form-control-plaintext" id="staticMatricule"
+                        value="{{col.matricule}}" readonly>
                 </div>
-                <ng-template #elseBlock>
+                <div class="card-text">
+                    <span class="text-muted">Nom : </span>
+                    <input type="text" [ngClass]="{'mod':isCreate}" class="rounded-pill form-control-plaintext"
+                        id="staticNom" value="{{col.nom | uppercase}}" required [readonly]="isReadonly">
+                </div>
+                <div class="card-text">
+                    <span class="text-muted">Prénom : </span>
+                    <input type="text" [ngClass]="{'mod':isCreate}" class="rounded-pill form-control-plaintext"
+                        id="staticPrenom" value="{{col.prenom}}" required [readonly]="isReadonly">
+                </div>
+                <div class="card-text">
+                    <span class="text-muted">Date de naissance : </span>
+                    <input type="text" [ngClass]="{'mod':isCreate}" class="rounded-pill form-control-plaintext"
+                        id="staticDdn" value="{{col.ddn | date}}" required [readonly]="isReadonly">
+                </div>
+                <div class="card-text">
+                    <span class="text-muted">Email : </span>
+                    <input type="text" [ngClass]="{'mod':!isReadonly}" class="rounded-pill form-control-plaintext"
+                        id="staticEmail" value="{{col.email}}" required [readonly]="isReadonly">
+                </div>
+                <div class="card-text">
+                    <span class="text-muted">Photo Url : </span>
+                    <input type="text" [ngClass]="{'mod':!isReadonly}" class="rounded-pill form-control-plaintext"
+                        id="staticPhoto" value="{{col.photoUrl}}" required [readonly]="isReadonly">
+                </div>
+
+
+
+                <!-- <ng-template #elseBlock>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">@</span>
@@ -30,7 +56,7 @@
                         <input type="text" class="form-control" placeholder="votre photo" aria-label="photo"
                             aria-describedby="basic-addon2">
                     </div>
-                </ng-template>
+                </ng-template> -->
 
                 <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
             </div>
@@ -75,12 +101,22 @@
 </div> -->
 <div class="row align-items-end ">
 
-    <ng-container *ngIf="creerIsVisible"><button (click)="creerCollegue()" type="button"
+    <ng-container *ngIf="isReadonly"><button (click)="creerCollegue()" type="button"
             class="btn btn-lg btn-outline-primary">nouveau</button></ng-container>
 
-    <ng-container *ngIf="modifierIsVisible"> <button (click)="modifierCollegue()" type="button"
+    <ng-container *ngIf="isReadonly"> <button (click)="modifierCollegue()" type="button"
             class="btn btn-lg btn-outline-secondary">modifier</button></ng-container>
 
-    <ng-container *ngIf="validerIsVisible"><button (click)="validerCreationCollegue()" type="button"
-            class="btn btn-lg btn-outline-primary">valider</button></ng-container>
+    <ng-container *ngIf="isCreationEnCours"><button (click)="validerCreationCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary">valider c</button></ng-container>
+    <ng-container *ngIf="isCreationEnCours"><button (click)="annulerEtats()" type="button"
+            class="btn btn-lg btn-outline-danger">annuler</button></ng-container>
+
+
+    <ng-container *ngIf="isModificationEnCours"><button (click)="validerModificationCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary">valider m</button></ng-container>
+    <ng-container *ngIf="isModificationEnCours"><button (click)="annulerEtats()" type="button"
+            class="btn btn-lg btn-outline-danger">annuler</button></ng-container>
+
+
 </div>

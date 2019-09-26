@@ -11,30 +11,59 @@ import { DataService } from '../services/data.service';
 export class CollegueComponent implements OnInit {
 
   @Input() col: Collegue;
-  validerIsVisible: boolean = false;
-  creerIsVisible: boolean = true;
-  modifierIsVisible: boolean = true;
 
+
+  //validerIsVisible: boolean = false;
+  //creerIsVisible: boolean = true;
+  //modifierIsVisible: boolean = true;
+
+  isModificationEnCours = false;
+  isCreationEnCours = false;
+
+  isReadonly: boolean = true;
+  //isCreate: boolean = false;
 
   constructor(private _dataService: DataService) {
 
   }
 
+  setEtatModifiable(etat: boolean) {
+    this.isReadonly = !etat;
+    this.isModificationEnCours = etat;
+  }
 
+  setEtatCreation(etat: boolean) {
+    this.isReadonly = !etat;
+    this.isCreationEnCours = etat;
+    this.isReadonly = !etat;
+
+  }
+
+  annulerEtats() {
+    this.setEtatCreation(false);
+    this.setEtatModifiable(false);
+  }
 
   modifierCollegue() {
-    this.validerIsVisible = true;
-    this.modifierIsVisible = false;
-    this.creerIsVisible = false;
+    this.annulerEtats()
+    this.setEtatModifiable(true);
+
   }
 
   creerCollegue() {
-    console.log("creer");
+    this.setEtatCreation(true);
+
+  }
+
+
+  validerModificationCollegue() {
+    this.annulerEtats();
+    this._dataService.modifierCollegueCourant();
+
   }
 
   validerCreationCollegue() {
-
-    console.log("creer");
+    this.annulerEtats();
   }
 
   ngOnInit() {

@@ -6,10 +6,10 @@
 </div>
 
 <div *ngIf="objetCollegue.matricule!=undefined; else elseBlock" class="container row mx-auto ">
-    <div class="col mb-4">
+    <div class="col- col-xl-4 mb-4">
         <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
     </div>
-    <div class="col">
+    <div class="col- col-xl-8 ">
         <app-collegue [col]="objetCollegue"></app-collegue>
     </div>
 </div>

@@ -17,10 +17,28 @@ export class RechercheParNomComponent implements OnInit {
   constructor(private _dataService: DataService) { }
 
   rechercherCollegueParNom(nom: string) {
-    this._dataService.rechercherParNom(nom).subscribe((list => this.maListe = list));
-    //this.maListe = this._dataService.rechercherParNom(nom);
+    this._dataService.rechercherParNom(nom).subscribe(
+      (list => {
+        if (list.length == 0) {
+          console.log("zero");
+        } else {
+          this.maListe = list;
+        };
+      }),
+      (error => console.log(error)),
+
+    );
+  }
+
+  rechercherCollegueParMatricule(matricule: string) {
+
+    this._dataService.recupererCollegueCourant(matricule).subscribe(collegueConnecte => {
+
+      this._dataService.subCollegueConnecte.next(collegueConnecte);
+    });
 
   }
+
 
   ngOnInit() {
   }
