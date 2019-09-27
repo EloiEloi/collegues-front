@@ -2,9 +2,10 @@
     <input type="text" class="rounded-pill form-control" placeholder="nom du collegue" aria-label="nom du collegue"
         aria-describedby="button-addon3" #nom>
     <div class="input-group-append">
-        <button (click)="rechercherCollegueParNom(nom.value)" class="btn btn-outline-secondary" type="button"
-            id="button-addon3">rechercher</button>
+        <button (click)="rechercherCollegueParNom(nom.value)" class="btn btn-outline-secondary rounded-pill"
+            type="button" id="button-addon3"><i data-feather="search"></i></button>
     </div>
+
 </div>
 
 <div *ngIf="rechercheIsFinie; else elseBlock"></div>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -21,9 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule, NgbModule, HttpClientModule, FormsModule
   ],
-  providers: [],
+  providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
- // mockCollegue = mockCollegue;
+  // mockCollegue = mockCollegue;
 }
