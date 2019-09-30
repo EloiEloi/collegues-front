@@ -17,3 +17,15 @@ input.mod {
     background: rgb(168, 168, 168);
     padding-left: 1rem;
 }
+
+.btn-outline-primary {
+    color: #5DCB9A;
+    border-color: #5DCB9A;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: #5DCB9A;
+    border-color: #5DCB9A;
+}
+

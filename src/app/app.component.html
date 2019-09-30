@@ -1,18 +1,15 @@
-<div class="jumbotron jumbotron-fluid mb-4">
-    <div class="container js text-center">
+<!-- <div class="jumbotron jumbotron-fluid mb-0">
+    <div class=" container js text-center">
         <h1 class="display-2">Administration Collegue</h1>
         <p class="lead">Bienvenue sur l'application qui trouve les collegues que vous cherchez</p>
     </div>
-</div>
+</div> -->
 
-<div *ngIf="objetCollegue.matricule!=undefined; else elseBlock" class="container row mx-auto ">
-    <div class="col- col-xl-4 mb-4">
-        <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
-    </div>
-    <div class="col- col-xl-8 ">
-        <app-collegue [col]="objetCollegue"></app-collegue>
-    </div>
-</div>
-<ng-template #elseBlock>
-    <app-authentification></app-authentification>
-</ng-template>
+
+<app-menu></app-menu>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

@@ -6,25 +6,26 @@
         <div class="col-8">
             <div class="card-body">
                 <h5 class="card-title"><span>{{col.nom | uppercase}} {{col.prenom | uppercase}}</span></h5>
+
                 <div class="card-text">
-                    <span class="text-muted">Matricule : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Matricule : </span>
                     <input type="text" class="rounded-pill form-control-plaintext" id="staticMatricule"
                         value="{{col.matricule}}" readonly>
                 </div>
                 <div class="card-text">
-                    <span class="text-muted">Nom : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Nom : </span>
                     <input type="text" [ngClass]="{'mod':isCreationEnCours}" class="rounded-pill form-control-plaintext"
                         #nom [(ngModel)]="col.nom" id="staticNom" value="{{col.nom | uppercase}}" required
                         [readonly]="!isCreationEnCours">
                 </div>
                 <div class="card-text">
-                    <span class="text-muted">Prénom : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Prénom : </span>
                     <input type="text" [ngClass]="{'mod':isCreationEnCours}" class="rounded-pill form-control-plaintext"
                         #prenom [(ngModel)]="col.prenom" id="staticPrenom" value="{{col.prenom}}" required
                         [readonly]="!isCreationEnCours">
                 </div>
                 <div class="card-text">
-                    <span class="text-muted">Date de naissance : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Date de naissance : </span>
                     <input (click)="d.toggle()" type="text" [ngClass]="{'mod':isCreationEnCours}"
                         class="rounded-pill form-control-plaintext" #ddn [(ngModel)]="col.ddn" id="staticDdn"
                         value="{{col.ddn | date}}" placeholder="{{col.ddn | date}}" name="dp" ngbDatepicker
@@ -34,13 +35,13 @@
 
 
                 <div class="card-text">
-                    <span class="text-muted">Email : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Email : </span>
                     <input type="text" [ngClass]="{'mod':isModificationEnCours||isCreationEnCours}"
                         [(ngModel)]="col.email" class="rounded-pill form-control-plaintext" id="staticEmail" required
                         [readonly]="!isCreationEnCours&&!isModificationEnCours">
                 </div>
                 <div class="card-text">
-                    <span class="text-muted">Photo Url : </span>
+                    <span class="badge badge-pill badge-primary font-weight-light">Photo: </span>
                     <input type="text" [ngClass]="{'mod':isModificationEnCours||isCreationEnCours}" #photo
                         [(ngModel)]="col.photoUrl" class="rounded-pill form-control-plaintext" id="staticPhoto" required
                         [readonly]="!isCreationEnCours&&!isModificationEnCours">
@@ -53,27 +54,33 @@
 
 <div class="row align-items-end ">
 
-    <ng-container *ngIf="!isModificationEnCours&&!isCreationEnCours"><button (click)="creerCollegue()" type="button"
-            class="btn btn-lg btn-outline-primary rounded-pill" [disabled]="boutonIsDisabled">nouveau</button>
-        <button (click)="modifierCollegue()" type="button" class="btn btn-lg btn-outline-secondary rounded-pill"
+    <ng-container *ngIf="!isModificationEnCours&&!isCreationEnCours">
+        <button (click)="creerCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary rounded-pill text-uppercase"
+            [disabled]="boutonIsDisabled">nouveau</button>
+        <button (click)="modifierCollegue()" type="button"
+            class="btn btn-lg btn-outline-secondary rounded-pill text-uppercase"
             [disabled]="boutonIsDisabled">modifier</button>
     </ng-container>
 
-    <ng-container *ngIf="isCreationEnCours"><button (click)="validerCreationCollegue()" type="button"
-            class="btn btn-lg btn-outline-primary rounded-pill" [disabled]="boutonIsDisabled">
+    <ng-container *ngIf="isCreationEnCours">
+        <button (click)="validerCreationCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary rounded-pill text-uppercase" [disabled]="boutonIsDisabled">
             <ng-container *ngIf="boutonIsDisabled"><span class="spinner-border spinner-border-sm" role="status"
                     aria-hidden="true"></span></ng-container>valider
         </button>
-        <button (click)="annulerEtats()" type="button" class="btn btn-lg btn-outline-danger rounded-pill"
+        <button (click)="annulerEtats()" type="button" class="btn btn-lg btn-outline-danger rounded-pill text-uppercase"
             [disabled]="boutonIsDisabled">annuler</button>
     </ng-container>
 
-    <ng-container *ngIf="isModificationEnCours"><button (click)="validerModificationCollegue()" type="button"
-            class="btn btn-lg btn-outline-primary rounded-pill">
+    <ng-container *ngIf="isModificationEnCours">
+        <button (click)="validerModificationCollegue()" type="button"
+            class="btn btn-lg btn-outline-primary rounded-pill text-uppercase">
             <ng-container *ngIf="boutonIsDisabled"><span class="spinner-border spinner-border-sm" role="status"
                     aria-hidden="true"></span></ng-container>valider
         </button>
         <button (click)="annulerEtats()" type="button"
-            class="btn btn-lg btn-outline-danger rounded-pill">annuler</button></ng-container>
+            class="btn btn-lg btn-outline-danger rounded-pill text-uppercase">annuler</button>
+    </ng-container>
 
 </div>

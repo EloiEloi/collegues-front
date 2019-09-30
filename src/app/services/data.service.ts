@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { mockMatricules } from "../mock/matricule.mocks";
 import { Collegue } from '../models/Collegue';
 import { map, flatMap, tap } from 'rxjs/operators';
+import { Photo } from '../models/Photo';
 
 
 
@@ -49,22 +50,22 @@ export class DataService {
       });
   }
 
+
+
   connexionAuthentification(identifiant: string, password: string) {
-    this._http.post(`${environment.backendUrl}auth`, { login: identifiant, mdp: password }, this.httpOptions)
-      .subscribe(() => {
-        this._http.get(`${environment.backendUrl}auth/user`, this.httpOptions)
-          .pipe(
-            flatMap((user: any) => this.recupererCollegueCourant(user.matricule))
-          )
-          .subscribe(collegueConnecte => {
-            // on est déjà connecté (le cookie est bien présent)
-            // on récupère donc le collegue avec les infos récupérées
-            this.subCollegueConnecte.next(collegueConnecte);
-          });
-      }, (error: HttpErrorResponse) => {
-        //console.log("error", error);
-      });
+    let isAuthentifie = false;
+    return this._http.post(`${environment.backendUrl}auth`, { login: identifiant, mdp: password }, this.httpOptions)
+      .pipe(
+        flatMap(() => this._http.get(`${environment.backendUrl}auth/user`, this.httpOptions)),
+        flatMap((user: any) => this.recupererCollegueCourant(user.matricule)),
+        tap(collegueConnecte => {
+          // on est déjà connecté (le cookie est bien présent)
+          // on récupère donc le collegue avec les infos récupérées
+          this.subCollegueConnecte.next(collegueConnecte);
+        })
+      );
   }
+
 
   rechercherParNom(nom: string): Observable<string[]> {
     return this._http.get<string[]>(`${environment.backendUrl}collegues?nom=${nom}`, this.httpOptions)
@@ -97,5 +98,10 @@ export class DataService {
     console.log("-->", collegue);
     return this._http.post<Collegue>(`${environment.backendUrl}collegues/`, collegue, this.httpOptions).pipe(tap((collegue) => this.subCollegueConnecte.next(collegue)));
   }
+
+  chercherPhotos(): Observable<Photo[]> {
+    return this._http.get<Photo[]>(`${environment.backendUrl}collegues/photos`);
+  }
+
 
 }

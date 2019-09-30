@@ -11,9 +11,9 @@ import { Collegue } from './models/Collegue';
 export class AppComponent {
 
 
-  //objetCollegue = mockCollegue;
+  
   objetCollegue: Collegue = null;
-  //authentificationIsOk: boolean = false;
+ 
 
   constructor(private _dataService: DataService) {
 

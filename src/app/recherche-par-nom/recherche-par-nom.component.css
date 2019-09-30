@@ -1,3 +1,15 @@
 li{
     cursor:pointer;
 }
+
+input {
+    transition: all 0.3s ease-out;
+}
+
+input:focus {
+    outline:none;
+}
+.border:hover
+{
+        box-shadow: inset 0 0 0 4px white;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -9,14 +10,10 @@ import { DataService } from '../services/data.service';
 })
 export class AuthentificationComponent implements OnInit {
 
-
-
-  constructor(private _dataService: DataService) {
-
-  }
+  constructor(private _dataService: DataService, private _router: Router) { }
 
   authentifier(identifiant: string, password: string) {
-    this._dataService.connexionAuthentification(identifiant, password)
+    this._dataService.connexionAuthentification(identifiant, password).subscribe(() => this._router.navigate(['/accueil']));
     return false;
   }
 

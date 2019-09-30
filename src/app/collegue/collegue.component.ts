@@ -2,20 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
 
-/**
- *
- *
- * @export
- * @class CollegueComponent
- * @implements {OnInit}
- */
-/**
- *
- *
- * @export
- * @class CollegueComponent
- * @implements {OnInit}
- */
+
 @Component({
   selector: 'app-collegue',
   templateUrl: './collegue.component.html',
@@ -26,14 +13,12 @@ export class CollegueComponent implements OnInit {
 
   @Input() col: Collegue;
 
-  //dateToday = Date.now();
-  myDate;
 
   isModificationEnCours = false;
   isCreationEnCours = false;
   boutonIsDisabled = false;
 
-  collegueBackUp: Collegue;
+  collegueTemp: Collegue;
 
   constructor(private _dataService: DataService) { }
 
@@ -42,18 +27,22 @@ export class CollegueComponent implements OnInit {
    *
    * @memberof CollegueComponent
    */
-  creerCollegueBackUp() {
-    this.collegueBackUp = { ...this.col };
-    this.col = this.collegueBackUp;
+  creerCollegueTempCopie() {
+    this.collegueTemp = { ...this.col };
+    this.col = this.collegueTemp;
+  }
+  creerCollegueTempVide() {
+    this.collegueTemp = new Collegue(null, null, null, null, null, 'http://');
+    this.col = this.collegueTemp;
   }
 
   setEtatModifiable(etat: boolean) {
-    this.creerCollegueBackUp();
+    this.creerCollegueTempCopie();
     this.isModificationEnCours = etat;
   }
 
   setEtatCreation(etat: boolean) {
-    this.creerCollegueBackUp();
+    this.creerCollegueTempVide();
     this.isCreationEnCours = etat;
   }
 

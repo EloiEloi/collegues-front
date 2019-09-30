@@ -8,7 +8,10 @@
             <label for="inputPassword2" class="sr-only">Password</label>
             <input type="password" class="form-control" id="inputPassword" placeholder="Password" #password>
         </div>
-        <button (click)="authentifier(login.value, password.value)" type="submit" class="btn btn-primary mb-2">Confirm
-            identity</button>
+        <button (click)="authentifier(login.value, password.value)" type="submit" class="btn btn-primary mb-2">
+
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Me connecter
+        </button>
     </form>
 </div>
