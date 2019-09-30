@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.Component.html',
+  templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {
