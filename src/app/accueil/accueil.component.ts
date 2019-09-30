@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-accueil',
@@ -10,17 +11,18 @@ import { DataService } from '../services/data.service';
 export class AccueilComponent implements OnInit {
 
   objetCollegue: Collegue = null;
- 
+  actionSub: Subscription;
 
-  constructor(private _dataService: DataService) {}
+
+  constructor(private _dataService: DataService) { }
 
   ngOnInit() {
-    this._dataService.subCollegueConnecte.subscribe(collegue => this.objetCollegue = collegue);
+    this.actionSub = this._dataService.subCollegueConnectObs.subscribe(collegue => this.objetCollegue = collegue);
 
   }
   ngOnDestroy() {
     // désabonnement du composant avant sa destruction
-    this._dataService.subCollegueConnecte.unsubscribe();
+    this.actionSub.unsubscribe();
   }
 
 }

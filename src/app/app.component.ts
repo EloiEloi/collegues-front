@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { DataService } from "./services/data.service";
 import { Collegue } from './models/Collegue';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +12,20 @@ import { Collegue } from './models/Collegue';
 export class AppComponent {
 
 
-  
+  actionSub: Subscription;
   objetCollegue: Collegue = null;
- 
+
 
   constructor(private _dataService: DataService) {
 
   }
 
   ngOnInit() {
-    this._dataService.subCollegueConnecte.subscribe(collegue => this.objetCollegue = collegue);
+    this.actionSub = this._dataService.subCollegueConnectObs.subscribe(collegue => this.objetCollegue = collegue);
 
   }
   ngOnDestroy() {
     // désabonnement du composant avant sa destruction
-    this._dataService.subCollegueConnecte.unsubscribe();
+    this.actionSub.unsubscribe();
   }
 }

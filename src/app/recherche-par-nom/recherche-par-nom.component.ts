@@ -32,10 +32,7 @@ export class RechercheParNomComponent implements OnInit {
 
   rechercherCollegueParMatricule(matricule: string) {
 
-    this._dataService.recupererCollegueCourant(matricule).subscribe(collegueConnecte => {
-
-      this._dataService.subCollegueConnecte.next(collegueConnecte);
-    });
+    this._dataService.recupererCollegueCourant(matricule);
 
   }
 

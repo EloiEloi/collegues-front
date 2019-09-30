@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class CollegueComponent implements OnInit {
 
   @Input() col: Collegue;
 
+  actionSub: Subscription;
 
   isModificationEnCours = false;
   isCreationEnCours = false;
@@ -54,7 +56,8 @@ export class CollegueComponent implements OnInit {
     this.setBoutonIsDisabled(false);
     this.setEtatCreation(false);
     this.setEtatModifiable(false);
-    this._dataService.subCollegueConnecte.subscribe(collegue => this.col = collegue);
+    this.actionSub = this._dataService.subCollegueConnectObs.subscribe(collegue => this.col = collegue)
+
   }
 
   modifierCollegue() {
@@ -68,25 +71,25 @@ export class CollegueComponent implements OnInit {
   }
 
   validerModificationCollegue() {
-    this._dataService.subCollegueConnecte.next(this.col);
+    this._dataService.subCollegueConnecteAction(this.col);
     this.setBoutonIsDisabled(true);
     this._dataService.enregistrerModificationCollegueCourant().subscribe(() => this.annulerEtats(), (error) => console.log(error));
   }
 
   validerCreationCollegue() {
-    this._dataService.subCollegueConnecte.next(this.col);
+    this._dataService.subCollegueConnecteAction(this.col);
     console.log("this.col --> ", this.col);
     this.setBoutonIsDisabled(true);
     this._dataService.enregistrerNouveauCollegueCourant().subscribe(() => this.annulerEtats(), (error) => console.log(error));
   }
 
   ngOnInit() {
-    this._dataService.subCollegueConnecte.subscribe();
+    this.actionSub = this._dataService.subCollegueConnectObs.subscribe();
   }
 
   ngOnDestroy() {
     // désabonnement du composant avant sa destruction
-    this._dataService.subCollegueConnecte.unsubscribe();
+    this.actionSub.unsubscribe();
   }
 
 }

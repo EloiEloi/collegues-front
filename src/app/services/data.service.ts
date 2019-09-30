@@ -15,7 +15,17 @@ import { Photo } from '../models/Photo';
 export class DataService {
 
   // subAuth = new BehaviorSubject<boolean>(false);
-  subCollegueConnecte = new BehaviorSubject<Collegue>(new Collegue(undefined, undefined, undefined, undefined, undefined, undefined));
+  private _subCollegueConnecte = new BehaviorSubject<Collegue>(new Collegue(undefined, undefined, undefined, undefined, undefined, undefined));
+
+  get subCollegueConnectObs() {
+    return this._subCollegueConnecte.asObservable();
+  }
+
+  subCollegueConnecteAction(collegue: Collegue) {
+    this._subCollegueConnecte.next(collegue);
+  }
+
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -37,19 +47,21 @@ export class DataService {
       photoUrl: string;
     }
 
-    // test similuant le test de la presence du cookie d'authentification afin de ne pas redemander le login & mot de passe
-    // en faisant une requete necessitant une authorisation, si reponse negative alors c est = pas de cookie, si reponse ok = on a le cookie
-    this._http.get(`${environment.backendUrl}auth/user`, this.httpOptions)
-      .pipe(
-        flatMap((user: any) => this.recupererCollegueCourant(user.matricule))
-      )
-      .subscribe(collegueConnecte => {
-        // on est déjà connecté (le cookie est bien présent)
-        // on récupère donc le collegue avec les infos récupérées
-        this.subCollegueConnecte.next(collegueConnecte);
-      });
   }
 
+
+  verifierAuthConnecte(): Observable<Collegue> {
+
+    return this._http.get(`${environment.backendUrl}auth/user`, this.httpOptions)
+      .pipe(
+        flatMap((user: any) => this.recupererCollegueCourant(user.matricule)),
+        tap(collegueConnecte => {
+          // on est déjà connecté (le cookie est bien présent)
+          // on récupère donc le collegue avec les infos récupérées
+          this._subCollegueConnecte.next(collegueConnecte);
+        })
+      );
+  }
 
 
   connexionAuthentification(identifiant: string, password: string) {
@@ -61,7 +73,7 @@ export class DataService {
         tap(collegueConnecte => {
           // on est déjà connecté (le cookie est bien présent)
           // on récupère donc le collegue avec les infos récupérées
-          this.subCollegueConnecte.next(collegueConnecte);
+          this._subCollegueConnecte.next(collegueConnecte);
         })
       );
   }
@@ -74,7 +86,13 @@ export class DataService {
   recupererCollegueCourant(matricule: string): Observable<Collegue> | null {
     let collegue: Collegue = null;
     return this._http.get(`${environment.backendUrl}collegues/${matricule}`, this.httpOptions)
-      .pipe(map((data: any) => new Collegue(data.matricule, data.nom, data.prenom, data.email, data.ddn, data.photoUrl)))
+      .pipe(
+        map((data: any) => new Collegue(data.matricule, data.nom, data.prenom, data.email, data.ddn, data.photoUrl)),
+        tap(collegueConnecte => {
+
+          this._subCollegueConnecte.next(collegueConnecte);
+        })
+      );
   }
 
   /**
@@ -84,8 +102,8 @@ export class DataService {
    * @memberof DataService
    */
   enregistrerModificationCollegueCourant(): Observable<Collegue> {
-    const collegue = this.subCollegueConnecte.value;
-    return this._http.patch<Collegue>(`${environment.backendUrl}collegues/${collegue.matricule}`, collegue, this.httpOptions).pipe(tap((collegue) => this.subCollegueConnecte.next(collegue)));
+    const collegue = this._subCollegueConnecte.value;
+    return this._http.patch<Collegue>(`${environment.backendUrl}collegues/${collegue.matricule}`, collegue, this.httpOptions).pipe(tap((collegue) => this._subCollegueConnecte.next(collegue)));
   }
 
   /**
@@ -94,13 +112,13 @@ export class DataService {
    * @memberof DataService
    */
   enregistrerNouveauCollegueCourant() {
-    const collegue = this.subCollegueConnecte.value;
-    console.log("-->", collegue);
-    return this._http.post<Collegue>(`${environment.backendUrl}collegues/`, collegue, this.httpOptions).pipe(tap((collegue) => this.subCollegueConnecte.next(collegue)));
+    const collegue = this._subCollegueConnecte.value;
+
+    return this._http.post<Collegue>(`${environment.backendUrl}collegues/`, collegue, this.httpOptions).pipe(tap((collegue) => this._subCollegueConnecte.next(collegue)));
   }
 
-  chercherPhotos(): Observable<Photo[]> {
-    return this._http.get<Photo[]>(`${environment.backendUrl}collegues/photos`);
+  recupererPhotosDeTousLesCollegues(): Observable<Photo[]> {
+    return this._http.get<Photo[]>(`${environment.backendUrl}collegues/photos`, this.httpOptions);
   }
 
 
