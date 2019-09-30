@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../services/data.service";
 import { Photo } from '../models/Photo';
-import { Subscription } from 'rxjs';
+import { Collegue } from '../models/Collegue';
+
+
 
 @Component({
   selector: 'app-gallerie',
@@ -11,13 +13,13 @@ import { Subscription } from 'rxjs';
 export class GallerieComponent implements OnInit {
 
   listePhotos: Photo[] = [];
-
+  collegueGalerie: Collegue = undefined;
 
   constructor(private _dataService: DataService) { }
 
 
   afficherDetail(matricule: string) {
-    console.log(matricule)
+    this._dataService.recupererCollegueAutrui(matricule).subscribe((collegue) => this.collegueGalerie = collegue)
   }
 
 

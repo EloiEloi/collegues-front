@@ -21,7 +21,12 @@
         </ul>
         <div class="">
             <i-feather name="user"></i-feather>
-            <span >{{col.nom | uppercase}} {{col.prenom | uppercase}}</span>
+            <span>{{col.nom | uppercase}} {{col.prenom | uppercase}}</span>
         </div>
+        <div class="">
+            <i-feather name="log-out"></i-feather>
+            <span (onclick)="logOut()">log out</span>
+        </div>
+
     </div>
 </nav>

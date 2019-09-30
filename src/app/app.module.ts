@@ -21,7 +21,7 @@ import { ROUTES } from "./app-routing.module";
 
 // import des icons de Feather icons
 import { FeatherModule } from 'angular-feather';
-import { Search, Github, User } from 'angular-feather/icons';
+import { Search, Github, User, LogOut } from 'angular-feather/icons';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -30,7 +30,8 @@ import { FooterComponent } from './footer/footer.component';
 const icons = {
   Search,
   Github,
-  User
+  User,
+  LogOut
 };
 
 @NgModule({

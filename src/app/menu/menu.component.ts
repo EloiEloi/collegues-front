@@ -13,6 +13,10 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
 
+  logOut() {
+    console.log("logout")
+  }
+
   ngOnInit() {
   }
 

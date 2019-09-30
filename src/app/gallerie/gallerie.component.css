@@ -5,3 +5,11 @@
     background-repeat: no-repeat;
     cursor:pointer;
 }
+
+.photoCollegueGallerie {
+    background-color: white;
+    min-height: 450px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}

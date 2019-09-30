@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { mockMatricules } from "../mock/matricule.mocks";
 import { Collegue } from '../models/Collegue';
@@ -14,7 +14,8 @@ import { Photo } from '../models/Photo';
 })
 export class DataService {
 
-  // subAuth = new BehaviorSubject<boolean>(false);
+
+
   private _subCollegueConnecte = new BehaviorSubject<Collegue>(new Collegue(undefined, undefined, undefined, undefined, undefined, undefined));
 
   get subCollegueConnectObs() {
@@ -84,14 +85,18 @@ export class DataService {
   }
 
   recupererCollegueCourant(matricule: string): Observable<Collegue> | null {
-    let collegue: Collegue = null;
     return this._http.get(`${environment.backendUrl}collegues/${matricule}`, this.httpOptions)
       .pipe(
         map((data: any) => new Collegue(data.matricule, data.nom, data.prenom, data.email, data.ddn, data.photoUrl)),
-        tap(collegueConnecte => {
+        tap(collegueConnecte => { this._subCollegueConnecte.next(collegueConnecte); })
+      );
+  }
 
-          this._subCollegueConnecte.next(collegueConnecte);
-        })
+
+  recupererCollegueAutrui(matricule: string): Observable<Collegue> {
+    return this._http.get(`${environment.backendUrl}collegues/${matricule}`, this.httpOptions)
+      .pipe(
+        map((data: any) => new Collegue(data.matricule, data.nom, data.prenom, data.email, data.ddn, data.photoUrl))
       );
   }
 

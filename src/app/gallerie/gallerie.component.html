@@ -1,4 +1,45 @@
 <div class="container row mx-auto justify-content-center mt-3">
-    <div class="col-12 col-md-5 col-lg-3 photoGroup m-3" [style.backgroundImage]="'url('+ obj.photoUrl +')'"
-        (click)="afficherDetail(obj.matricule)" *ngFor="let obj of listePhotos"></div>
+
+    <div *ngIf="collegueGalerie!=undefined; else elseBlock" class="col-8">
+        <h5 class="card-title"><span>{{collegueGalerie.nom | uppercase}} {{collegueGalerie.prenom | uppercase}}</span>
+        </h5>
+
+        <div [style.backgroundImage]="'url('+ collegueGalerie.photoUrl +')'" class="photoCollegueGallerie"></div>
+
+        <div class="card-text">
+            <span class="badge badge-pill badge-primary font-weight-light">Matricule : </span>
+            <span>{{collegueGalerie.matricule}}</span>
+
+        </div>
+        <div class="card-text">
+            <span class="badge badge-pill badge-primary font-weight-light">Nom : </span>
+            <span>{{collegueGalerie.nom}}</span>
+
+        </div>
+        <div class="card-text">
+            <span class="badge badge-pill badge-primary font-weight-light">Prénom : </span>
+            <span>{{collegueGalerie.prenom}}</span>
+
+        </div>
+        <div class="card-text">
+            <span class="badge badge-pill badge-primary font-weight-light">Date de naissance : </span>
+            <span>{{collegueGalerie.ddn | date}}</span>
+
+        </div>
+
+        <div class="card-text">
+            <span class="badge badge-pill badge-primary font-weight-light">Email : </span>
+            <span>{{collegueGalerie.email}}</span>
+
+        </div>
+
+    </div>
+
+
+    <ng-template #elseBlock>
+
+        <div class="col-12 col-md-5 col-lg-3 photoGroup m-3" [style.backgroundImage]="'url('+ obj.photoUrl +')'"
+            (click)="afficherDetail(obj.matricule)" *ngFor="let obj of listePhotos"></div>
+
+    </ng-template>
 </div>
